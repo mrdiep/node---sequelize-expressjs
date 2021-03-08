@@ -1,8 +1,8 @@
 import express from 'express';
 import routes from '../routes';
-import { logger, errorLoger } from './logger';
-import { documentation } from './apiDoc'
-import { authenticate } from './auth'
+import {logger, errorLoger} from './logger';
+import {documentation} from './apiDoc';
+import {authenticate} from './auth';
 
 import pageNotFoundHandler from './pageNotFoundHandler';
 
@@ -25,7 +25,7 @@ server.use(pageNotFoundHandler);
 server.use(errorLoger);
 // global catch error
 // do not code like this. use the external with injectable logger
-server.use(function (err, req, res, next) {
+server.use(function(err, req, res, next) {
   res.status(err.status || 500);
   res.json({
     'errors': {

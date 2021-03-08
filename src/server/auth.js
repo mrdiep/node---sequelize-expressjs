@@ -9,7 +9,7 @@ export const authenticate = (req, res, next) => {
 
   // check user access: such as be locked, be expirered......
 
-  req.authenticatedUser = { username: 'An', userId: 1 };
+  req.authenticatedUser = {username: 'An', userId: 1};
   req.isAuthenticated = auth;
   next();
-}
+};

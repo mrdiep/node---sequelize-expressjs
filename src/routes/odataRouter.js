@@ -3,7 +3,7 @@
 import {Router} from 'express';
 import {odata as odataController} from '../controllers';
 
-//copy style from .net odata
+// copy style from .net odata
 const router = Router();
 router.get('/:tableName', odataController.getAll);
 export default router;
