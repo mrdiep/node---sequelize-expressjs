@@ -3,7 +3,7 @@ import {Router} from 'express';
 import {v4 as uuidv4} from 'uuid';
 
 import productRouter from './productRouter';
-import genericRouter from './genericRouter';
+import odataRouter from './odataRouter';
 import orderRouter from './orderRouter';
 
 const router = Router();
@@ -21,8 +21,8 @@ router.get('/', (req, res) => {
   res.send('Sample testing the CPU working. Counter:' + sampleIncreasementIndex);
 });
 
+router.use('/odata', odataRouter);
 router.use('/products', productRouter);
-router.use('/generic-data', genericRouter);
 router.use('/orders', orderRouter);
 // add more bussiness router bellow, do not mixed router
 

@@ -1,7 +1,7 @@
 import expressWinston from 'express-winston';
 import winston from 'winston';
 
-export default expressWinston.logger({
+export const logger = expressWinston.logger({
   transports: [
     // can have many target: like send email, send to ms team, send to webservice...
     new winston.transports.Console(),
@@ -16,3 +16,13 @@ export default expressWinston.logger({
   colorize: true, // Color the text and status code, using the Express/morgan color palette (text: gray, status: default green, 3XX cyan, 4XX yellow, 5XX red).
   ignoreRoute: (req, res) => false,
 });
+
+export const errorLoger = expressWinston.errorLogger({
+  transports: [
+    new winston.transports.Console({
+      json: true,
+      colorize: true,
+    }),
+  ],
+})
+ 

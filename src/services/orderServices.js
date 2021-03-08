@@ -1,6 +1,5 @@
 // must use absolute path
 import models from '../database/models';
-import products from '../database/models/products';
 
 // should implement the bussiness logic here
 export const requestNewOrder = async ({

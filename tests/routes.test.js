@@ -1,6 +1,7 @@
 const request = require('supertest');
 const app = require('../server');
 
+//same code: not working as well
 describe('Post Endpoints', () => {
   it('should create a new post', async () => {
     const res = await request(app)

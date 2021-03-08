@@ -28,6 +28,21 @@
         "responses": {}
       }
     },
+    "/api/odata/{tableName}": {
+      "get": {
+        "tags": [],
+        "description": "",
+        "parameters": [
+          {
+            "name": "tableName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {}
+      }
+    },
     "/api/products/": {
       "post": {
         "tags": [],
@@ -88,14 +103,6 @@
             "type": "string"
           }
         ],
-        "responses": {}
-      }
-    },
-    "/api/generic-data/": {
-      "get": {
-        "tags": [],
-        "description": "",
-        "parameters": [],
         "responses": {}
       }
     },
