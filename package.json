@@ -5,7 +5,7 @@
   "author": "",
   "license": "MIT",
   "scripts": {
-    "start-dev": "npm run build-client-first && nodemon --exec babel-node src/index.js",
+    "start-dev": "nodemon --exec babel-node src/index.js",
     "test": "jest --testTimeout=10000",
     "migrate:reset": "npx sequelize-cli db:migrate:undo:all && npm run migrate",
     "pretest": "cross-env NODE_ENV=test npm run migrate:reset",
@@ -30,22 +30,25 @@
     "verbose": true
   },
   "dependencies": {
+    "connected-react-router": "^6.9.1",
     "dotenv": "^8.0.0",
     "express": "^4.17.1",
     "express-winston": "^4.1.0",
+    "history": "^5.0.0",
     "pg": "^7.18.2",
     "pg-hstore": "^2.3.3",
-    "sequelize": "^6.5.0",
-    "swagger-autogen": "^2.6.9",
-    "tedious": "^11.0.5",
-    "uuid": "^8.3.2",
-    "winston": "^3.3.3",
-    "swagger-ui-express": "^4.1.6",
     "react": "^16.13.0",
     "react-dom": "^16.13.0",
     "react-redux": "^7.2.0",
+    "react-router-dom": "^5.2.0",
     "redux": "^4.0.5",
-    "redux-thunk": "^2.3.0"
+    "redux-thunk": "^2.3.0",
+    "sequelize": "^6.5.0",
+    "swagger-autogen": "^2.6.9",
+    "swagger-ui-express": "^4.1.6",
+    "tedious": "^11.0.5",
+    "uuid": "^8.3.2",
+    "winston": "^3.3.3"
   },
   "devDependencies": {
     "@babel/core": "^7.13.8",

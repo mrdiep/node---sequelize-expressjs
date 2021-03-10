@@ -1,5 +1,3 @@
-import { fetch } from '../../client-server-data-bridge'
-
 export const REQUEST_FETCH_PRODUCTS = 'REQUEST_FETCH_PRODUCTS'
 export const RECEIVE_PRODUCTS = 'RECEIVE_PRODUCTS'
 

@@ -8,8 +8,8 @@ import ssr from '../../src-client-react/server'
 export default (app) => {
     app.use('/assets', express.static(path.resolve(__dirname, '../../assets')));
 
-    app.get('/', (req, res) => {
-        const { finalState, content } = ssr(req)
+    app.get('/*', async (req, res) => {
+        const { finalState, content } =  await ssr(req)
         res.send(renderFullPage(content, finalState));
     });
 }
