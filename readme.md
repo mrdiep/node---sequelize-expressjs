@@ -28,3 +28,6 @@ sequelize:
 avoid: + select findAll then filter on server.
 
 import postman at test folder to test api
+
+react ssr: https://redux.js.org/recipes/server-rendering#redux-on-the-server
+https://reactrouter.com/web/guides/server-rendering

@@ -7,17 +7,25 @@ import odataRouter from './odataRouter';
 import orderRouter from './orderRouter';
 
 const router = Router();
-router.get('/', (req, res) => {
+router.get('/', async (req, res) => {
   const countTo = parseInt(req.query.countTo);
-
   let sampleIncreasementIndex = 0;
-  const id =uuidv4();
-  console.time(id + '::' + countTo);
-  for (let x = 0; x < parseInt(countTo); x++) {
-    sampleIncreasementIndex++;
-  }
+  const p =  new Promise((s, r) => {
+    setTimeout(() => {
+      
+      const id =uuidv4();
+      console.time(id + '::' + countTo);
+      for (let x = 0; x < parseInt(countTo); x++) {
+        sampleIncreasementIndex++;
+      }
+      console.timeEnd(id + '::' + countTo);
+      s();
+    }, countTo);
 
-  console.timeEnd(id + '::' + countTo);
+  })
+
+  await p;
+  
   res.send('Sample testing the CPU working. Counter:' + sampleIncreasementIndex);
 });
 

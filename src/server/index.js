@@ -5,6 +5,7 @@ import {documentation} from './apiDoc';
 import {authenticate} from './auth';
 
 import pageNotFoundHandler from './pageNotFoundHandler';
+import registerReactAsServerSide from './registerReactServerSide'
 
 // / create server base on the express js library
 const server = express();
@@ -18,9 +19,12 @@ server.use((req, res, next) => {
   next();
 });
 
-server.use(logger);
+// server.use(logger);
 server.use(authenticate);
 server.use('/api', routes);
+
+registerReactAsServerSide(server);
+
 server.use(pageNotFoundHandler);
 server.use(errorLoger);
 // global catch error
