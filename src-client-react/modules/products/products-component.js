@@ -1,14 +1,10 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { fetchProducts } from '../redux/actions'
-
+import { bindActionCreators } from 'redux'
+import { fetchProducts, deleteProducts } from './products-action'
+import ProductItem from './product-item-component'
+import * as ActionCreators from './products-action'
 class ProductsComponent extends Component {
-
-  static loadSSData() {
-    return new Promise((s, r) => {
-      s({ products: [{ product_name: 'BIKE NUMBER 1. HEHE' }], isFetching: true });
-    });
-  }
 
   componentDidMount() {
     console.log('componentDidMount')
@@ -17,31 +13,36 @@ class ProductsComponent extends Component {
     //will use: bind action to props
     console.log(isFetching)
     if (!isFetching) {
-    dispatch(fetchProducts())
+      dispatch(fetchProducts())
     }
   }
 
 
   render() {
     console.log('hello diep')
-    const { isFetching, products } = this.props
+    const { isFetching, products,actions } = this.props
+    console.log(this.props)
     const totalProducts = products.length;
-    console.log(JSON.stringify(this.props));
     return (
       <>
         {isFetching && totalProducts === 0 && <h2>Loading...</h2>}
         {!isFetching && totalProducts === 0 && <h2>Empty.</h2>}
-        {products.map(x => (<h4 key={x}>{x.product_name}</h4>))}
+        {products.map(x => (ProductItem(x, actions)))}
       </>
     );
   }
 }
 
-function mapStateToProps({ isFetching, products }) {
+function mapStateToProps({ products }) {
   return {
-    isFetching,
-    products
+    ...products
   }
 }
 
-export default connect(mapStateToProps)(ProductsComponent)
+function mapDispatchToProps(dispatch) {
+  return {
+    dispatch,
+    actions:  bindActionCreators(ActionCreators, dispatch)
+  }
+}
+export default connect(mapStateToProps, mapDispatchToProps)(ProductsComponent)

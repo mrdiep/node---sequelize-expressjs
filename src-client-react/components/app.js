@@ -1,6 +1,6 @@
 import React from 'react';
 import { Route, Switch, NavLink } from 'react-router-dom';
-import Products from './product-component';
+import Products from '../modules/products/products-component';
 
 export default props => {
   return (

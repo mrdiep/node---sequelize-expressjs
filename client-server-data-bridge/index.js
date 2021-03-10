@@ -1,3 +1,4 @@
+//export const fetchProducts = async () => {return { products: { isFetched: false, products:[] } }}
 import models from '../src/database/models'
 export const fetchProducts = async () => {
     const products = await models.products.findAll({
@@ -20,6 +21,6 @@ export const fetchProducts = async () => {
         ],
     });
 
-    return { isFetched: true, products };
+    return { products: { isFetching: true, products } };
 }
 

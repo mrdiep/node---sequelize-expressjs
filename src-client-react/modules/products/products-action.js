@@ -1,5 +1,6 @@
 export const REQUEST_FETCH_PRODUCTS = 'REQUEST_FETCH_PRODUCTS'
 export const RECEIVE_PRODUCTS = 'RECEIVE_PRODUCTS'
+export const DELETE_PRODUCTS_SUCCESS = 'DELETE_PRODUCTS_SUCCESS'
 
 function requestFetchProducts() {
   return {
@@ -13,6 +14,15 @@ function receiveProducts(json) {
     products: json
   }
 }
+
+export function deleteProducts(productId) {
+  console.log('delete/ hehe. call api here then dispatch store' + productId);
+  return {
+    type: DELETE_PRODUCTS_SUCCESS,
+    productId: productId
+  }
+}
+ 
 
 //second way
 export function fetchProducts() {

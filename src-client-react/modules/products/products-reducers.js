@@ -1,4 +1,4 @@
-import { REQUEST_FETCH_PRODUCTS,  RECEIVE_PRODUCTS } from './actions';
+import { REQUEST_FETCH_PRODUCTS,  RECEIVE_PRODUCTS, DELETE_PRODUCTS_SUCCESS } from './products-action';
 
 function apps(state = {isFetching: false, products: []}, action) {
   switch (action.type) {
@@ -10,6 +10,11 @@ function apps(state = {isFetching: false, products: []}, action) {
       return Object.assign({}, state, {
         isFetching: false,
         products: action.products
+      });
+    case DELETE_PRODUCTS_SUCCESS:
+      return Object.assign({}, state, {
+        isFetching: false,
+        products: [...state.products.filter(x => x.product_id != action.productId) ]
       });
     default:
       return state

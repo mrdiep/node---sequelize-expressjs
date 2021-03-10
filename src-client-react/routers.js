@@ -1,4 +1,4 @@
-import Products from './components/product-component';
+import Products from './modules/products/products-component';
 
 // if server side: use this to fetch data
 import { fetchProducts } from '../client-server-data-bridge'
