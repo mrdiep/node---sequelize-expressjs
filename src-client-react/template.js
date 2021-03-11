@@ -1,3 +1,4 @@
+//want SEO: add new parameter here. then replace the html bellow
 export default function renderFullPage(html, finalState) {
   return `
     <!doctype html>

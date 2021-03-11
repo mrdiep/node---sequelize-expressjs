@@ -20,10 +20,29 @@ class ProductsComponent extends Component {
     return (
       <div>
 
+        <b>WANT BEAUTIY: ADD CSS AND STYLE LIBS</b>
         order_id: {orderDetail.order_id}
+        <br/>
         customer: {orderDetail.customer?.first_name}
 
-        
+        <br/>
+        DETAIL ORDER ITEMS:
+        {orderDetail.order_items.map((x, i) => (
+
+          <div key={i}>
+             <br/>
+             <br/>
+            Product: {x.product.product_name}
+            <br/>
+            List_price: ${x.list_price}
+            <br/>
+            Quantity: {x.quantity}
+            <br/>
+            Total: ${x.list_price * x.quantity}
+            </div>
+        ))}
+
+
 
       </div>
     );

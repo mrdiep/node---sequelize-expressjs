@@ -11,6 +11,8 @@ export default function configureStore(preloadedState) {
     }),
     preloadedState,
     applyMiddleware(
+      //want redux dev tool: add here
+      //want saga: add here?
       thunkMiddleware
     )
   )

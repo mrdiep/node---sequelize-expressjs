@@ -1,5 +1,4 @@
 import React from 'react';
-import { makeStyles } from '@material-ui/core/styles';
 import Card from '@material-ui/core/Card';
 import CardActionArea from '@material-ui/core/CardActionArea';
 import CardActions from '@material-ui/core/CardActions';
@@ -33,7 +32,7 @@ export default (product, actions) => {
           Delete
         </Button>
         <Button size="small" color="primary">
-          Learn More
+          ADD TO CART - fire action as normal dev
         </Button>
       </CardActions>
     </Card>

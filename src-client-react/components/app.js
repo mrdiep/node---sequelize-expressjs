@@ -1,5 +1,5 @@
 import React from 'react';
-import { Route, Switch, NavLink } from 'react-router-dom';
+import { Route, Switch } from 'react-router-dom';
 import Products from '../modules/products/products-component';
 import Orders from '../modules/orders/orders-component';
 

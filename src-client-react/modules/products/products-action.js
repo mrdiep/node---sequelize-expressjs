@@ -17,7 +17,7 @@ function receiveProducts(json) {
 
 export function deleteProduct(productId) {
   console.log('delete/ hehe. call api here then dispatch store' + productId);
-
+  // use axios call here then dispatch DELETE_PRODUCTS_SUCCESS
   return dispatch => {
     // asumme call api done after 3 seconds
     setTimeout(() => {

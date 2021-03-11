@@ -35,6 +35,7 @@ class ProductsComponent extends Component {
   }
 }
 
+
 function mapStateToProps({ products }) {
   return {
     ...products
@@ -47,4 +48,6 @@ function mapDispatchToProps(dispatch) {
     actions: bindActionCreators(ActionCreators, dispatch)
   }
 }
+
+// google: high order control
 export default connect(mapStateToProps, mapDispatchToProps)(ProductsComponent)

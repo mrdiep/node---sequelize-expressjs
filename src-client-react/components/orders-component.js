@@ -11,7 +11,6 @@ class ProductsComponent extends Component {
     dispatch(fetchProducts())
   }
 
-
   render() {
     console.log('hello diep')
     const { isFetching, products } = this.props
