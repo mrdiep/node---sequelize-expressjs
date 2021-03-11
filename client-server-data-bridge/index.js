@@ -1,5 +1,9 @@
 //export const fetchProducts = async () => {return { products: { isFetched: false, products:[] } }}
 import models from '../src/database/models'
+
+import {getOrderById} from '../src/services/orderServices'
+
+// do not use this way: import service as sample bellow
 export const fetchProducts = async () => {
     const products = await models.products.findAll({
         limit:10,
@@ -24,3 +28,12 @@ export const fetchProducts = async () => {
     return { products: { isFetching: true, products } };
 }
 
+export const fetchOrderItemByOrderId = async ({order_id}) => {
+    console.log('aaaaaaaaaa: ' + order_id);
+
+    order_id = 1
+
+    const orderDetail = await getOrderById({order_id})
+
+    return { orders: { isFetching: true, orderDetail } };
+}

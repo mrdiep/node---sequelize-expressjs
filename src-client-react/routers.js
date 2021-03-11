@@ -1,13 +1,19 @@
 import Products from './modules/products/products-component';
+import Orders from './modules/orders/orders-component';
 
-// if server side: use this to fetch data
-import { fetchProducts } from '../client-server-data-bridge'
+// if server side: use this to fetch data. should use webpack to switch the build condition
+import { fetchProducts, fetchOrderItemByOrderId } from '../client-server-data-bridge'
 
 const Routes = [
   {
     path: '/products',
     component: Products,
-    loadData: () => fetchProducts({options: {limit:10}})
+    loadData: (options) => fetchProducts(options)
+  },
+  {
+    path: '/orders/:orderId',
+    component: Orders,
+    loadData: (options) => fetchOrderItemByOrderId(options)
   }
 ];
 

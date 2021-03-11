@@ -1,26 +1,28 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
-import { fetchProducts, deleteProducts } from './products-action'
+import { fetchProducts } from './products-action'
 import ProductItem from './product-item-component'
 import * as ActionCreators from './products-action'
 class ProductsComponent extends Component {
 
   componentDidMount() {
     console.log('componentDidMount')
-    const { isFetching, products } = this.props
-    const { dispatch } = this.props
+    const { isFetching } = this.props
     //will use: bind action to props
     console.log(isFetching)
     if (!isFetching) {
       dispatch(fetchProducts())
-    }
-  }
+      // another way:
+      //this.props.actions.fetchProducts();
 
+    }
+
+  }
 
   render() {
     console.log('hello diep')
-    const { isFetching, products,actions } = this.props
+    const { isFetching, products, actions } = this.props
     console.log(this.props)
     const totalProducts = products.length;
     return (
@@ -42,7 +44,7 @@ function mapStateToProps({ products }) {
 function mapDispatchToProps(dispatch) {
   return {
     dispatch,
-    actions:  bindActionCreators(ActionCreators, dispatch)
+    actions: bindActionCreators(ActionCreators, dispatch)
   }
 }
 export default connect(mapStateToProps, mapDispatchToProps)(ProductsComponent)

@@ -15,21 +15,29 @@ function receiveProducts(json) {
   }
 }
 
-export function deleteProducts(productId) {
+export function deleteProduct(productId) {
   console.log('delete/ hehe. call api here then dispatch store' + productId);
-  return {
-    type: DELETE_PRODUCTS_SUCCESS,
-    productId: productId
+
+  return dispatch => {
+    // asumme call api done after 3 seconds
+    setTimeout(() => {
+      dispatch({
+        type: DELETE_PRODUCTS_SUCCESS,
+        productId: productId
+      })
+    }, 3000);
   }
+
+
 }
- 
+
 
 //second way
 export function fetchProducts() {
   return dispatch => {
     dispatch(requestFetchProducts())
-    // example request
-    return fetch({ store: 1, limit: 10, offset:20 })
+    // example request, use axios/fetch lib here
+    return fetch({ store: 1, limit: 10, offset: 20 })
       //.then(response => response.json())
       //second way dispatcher
       .then(json => dispatch({

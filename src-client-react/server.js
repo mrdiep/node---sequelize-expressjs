@@ -12,7 +12,7 @@ export default async (req) => {
   console.log(req.url);
   const currentRoute = Routes.find(route => matchPath(req.url, route)) || {};
 
-  const initialState  = await currentRoute.loadData();
+  const initialState  = await currentRoute.loadData(req.params);
 
   const store = configureStore(initialState)
   // render the App store static markup ins content variable
