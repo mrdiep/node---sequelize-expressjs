@@ -11,7 +11,7 @@ const Routes = [
     loadData: (options) => fetchProducts(options)
   },
   {
-    path: '/orders/:orderId',
+    path: '/orders/:order_id',
     component: Orders,
     loadData: (options) => fetchOrderItemByOrderId(options)
   }

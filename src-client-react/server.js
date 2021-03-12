@@ -10,9 +10,20 @@ export default async (req) => {
   // Configure the store with the initial state provided
   //const initialState = { isFetching: false, products: [] } //depend on req
   console.log(req.url);
-  const currentRoute = Routes.find(route => matchPath(req.url, route)) || {};
 
-  const initialState  = await currentRoute.loadData(req.params);
+  const matches = Routes
+  .map(route => ({matchValue: matchPath(req.url, route), route}))
+  .filter(x => x.matchValue)
+
+  if (matches.length == 0) {
+    return {match: false};
+  }
+
+  const currentRoute = matches[0];
+
+  console.log(currentRoute.matchValue)
+
+  const initialState  = await currentRoute.route.loadData(currentRoute.matchValue.params);
 
   const store = configureStore(initialState)
   // render the App store static markup ins content variable
@@ -27,5 +38,5 @@ export default async (req) => {
   // Get a copy of store data to create the same store on client side 
   const finalState = store.getState()
 
-  return { content, finalState };
+  return { content, finalState, match: true };
 }

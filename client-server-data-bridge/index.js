@@ -29,10 +29,6 @@ export const fetchProducts = async () => {
 }
 
 export const fetchOrderItemByOrderId = async ({order_id}) => {
-    console.log('aaaaaaaaaa: ' + order_id);
-
-    order_id = 1
-
     const orderDetail = await getOrderById({order_id})
 
     return { orders: { isFetching: true, orderDetail } };
