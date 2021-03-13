@@ -2,7 +2,7 @@
 import models from '../src/database/models'
 
 import { getOrderById } from '../src/services/orderServices'
-
+import { initState as orderInitState } from '../src-client-react/modules/orders/orders-reducers'
 // do not use this way: import service as sample bellow
 export const fetchProducts = async () => {
   const products = await models.products.findAll({
@@ -31,5 +31,5 @@ export const fetchProducts = async () => {
 export const fetchOrderItemByOrderId = async ({ order_id }) => {
   const orderDetail = await getOrderById({ order_id })
 
-  return { orders: { isFetching: true, orderDetail, cartItemCounter: 1 } };
+  return { orders: { ...orderInitState, orderDetail, isFetching: true} };
 }

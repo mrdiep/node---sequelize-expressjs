@@ -1,12 +1,10 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
-
-import * as ActionCreators from './orders-action'
-
-import { createWrapActions } from './actions'
-
 import { Button, Container, Row, Col, Table } from 'react-bootstrap';
+
+import SearchAndOrderMoreProduct from './search-and-order-component'
+import { createWrapActions } from '../actions'
 
 class ProductsComponent extends Component {
 
@@ -21,7 +19,7 @@ class ProductsComponent extends Component {
   }
 
   render() {
-    const { orderDetail, showLoadingIndicator, newActions } = this.props
+    const { orderDetail, showLoadingIndicator, newActions, searchMoreProductViewModel } = this.props
     if (showLoadingIndicator) {
       return (
         <Container>
@@ -101,15 +99,21 @@ class ProductsComponent extends Component {
               </Table>
             </Col>
           </Row>
-
           <Row>
-            <Col>
+            <Col sm={12}>
+              <SearchAndOrderMoreProduct
+                order_id={orderDetail.order_id}
+                searchText={searchMoreProductViewModel.searchText}
+                products={searchMoreProductViewModel.productsResult}
+                actions={newActions} />
+            </Col>
+          </Row>
+          <Row>
+            <Col sm={12}>
               <Button onClick={() => newActions.requestAddToCard({ prop1: 1 })}>
                 Sample Async - action: requestAddToCard
               </Button>
             </Col>
-            <Col xs={6}>2 of 3 (wider)</Col>
-            <Col>3 of 3</Col>
           </Row>
         </Container>
 
@@ -125,7 +129,6 @@ function mapStateToProps({ orders }) {
 function mapDispatchToProps(dispatch) {
   return {
     dispatch,
-    actions: bindActionCreators(ActionCreators, dispatch),
     newActions: bindActionCreators(createWrapActions(), dispatch)
   }
 }

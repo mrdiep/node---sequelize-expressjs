@@ -1,5 +1,5 @@
 import Products from './modules/products/products-component';
-import Orders from './modules/orders/orders-component';
+import Orders from './modules/orders/components/orders-container';
 
 // if server side: use this to fetch data. should use webpack to switch the build condition
 import { fetchProducts, fetchOrderItemByOrderId } from '../client-server-data-bridge'

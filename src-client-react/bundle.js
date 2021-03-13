@@ -4,7 +4,7 @@ import { Provider } from 'react-redux'
 import configureStore from './redux/configureStore'
 import App from './components/app'
 import { BrowserRouter } from 'react-router-dom';
-
+// import 'bootstrap/dist/css/bootstrap.css';
 // Read the state sent with markup
 const state = window.__PRELOADED_STATE__;
 
