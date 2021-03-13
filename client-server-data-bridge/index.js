@@ -31,5 +31,5 @@ export const fetchProducts = async () => {
 export const fetchOrderItemByOrderId = async ({ order_id }) => {
   const orderDetail = await getOrderById({ order_id })
 
-  return { orders: { isFetching: true, orderDetail } };
+  return { orders: { isFetching: true, orderDetail, cartItemCounter: 1 } };
 }

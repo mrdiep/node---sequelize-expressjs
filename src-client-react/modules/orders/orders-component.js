@@ -4,7 +4,9 @@ import { bindActionCreators } from 'redux'
 
 import * as ActionCreators from './orders-action'
 
-import { createWrapActions } from './simpler'
+import { createWrapActions } from './actions'
+
+import { Button, Container, Row, Col, Table } from 'react-bootstrap';
 
 class ProductsComponent extends Component {
 
@@ -19,34 +21,97 @@ class ProductsComponent extends Component {
   }
 
   render() {
-    const { isFetching, orderDetail, newActions } = this.props
+    const { orderDetail, showLoadingIndicator, newActions } = this.props
+    if (showLoadingIndicator) {
+      return (
+        <Container>
+          <Row>
+            <Col sm={12}>
+              Sample loading async ... (wait 3 sec)
+            </Col>
+          </Row>
+        </Container>
+      );
+    }
+
+    const renderRow = (key, value) => (<Row>
+      <Col sm={4}><b>{key}</b></Col>
+      <Col sm={8}>{value}</Col>
+    </Row>);
+
     return (
       <div>
+        <Container>
+          <Row>
+            <Col sm={12}>
+              <h4>ORDER DETAIL</h4>
+            </Col>
+          </Row>
 
-<button onClick={() => newActions.requestAddToCard({prop1: 1})}>SIMPLE DISPATC ACTION - ACTION_REDUCER BASED CLASS</button>
-        <b>WANT BEAUTIY: ADD CSS AND STYLE LIBS</b>
-        order_id: {orderDetail.order_id}
-        <br/>
-        customer: {orderDetail.customer?.first_name}
+          {renderRow('Customer Name', orderDetail.customer?.first_name)}
+          {renderRow('Customer Email', orderDetail.customer?.email)}
+          {renderRow('Store', orderDetail.store.store_name)}
+          {renderRow('Store Address', `${orderDetail.store.street}, ${orderDetail.store.city}`)}
 
-        <br/>
-        DETAIL ORDER ITEMS:
-        {orderDetail.order_items.map((x, i) => (
+          {renderRow('Seller:', `${orderDetail.staff.first_name}, ${orderDetail.staff.email}`)}
 
-          <div key={i}>
-             <br/>
-             <br/>
-            Product: {x.product.product_name}
-            <br/>
-            List_price: ${x.list_price}
-            <br/>
-            Quantity: {x.quantity}
-            <br/>
-            Total: ${x.list_price * x.quantity}
-            </div>
-        ))}
+          {renderRow('Order Id', orderDetail.order_id)}
+          {renderRow('Order Date', orderDetail.order_date)}
+          {renderRow('Required Date', orderDetail.required_date)}
+          {renderRow('Shipped Date', orderDetail.shipped_date)}
 
+          <Row>
+            <Col sm={12}>
+              <h5>Order Items:</h5>
+            </Col>
+          </Row>
+          <Row>
+            <Col sm={12}>
+              <Table striped bordered hover size="sm">
+                <thead>
+                  <tr>
+                    <th>#</th>
+                    <th>Product Name</th>
+                    <th>Quantity</th>
+                    <th>Price</th>
+                    <th>Total</th>
+                    <th></th>
+                    <th></th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {orderDetail.order_items.map((x, i) => (
+                    <tr key={i}>
+                      <td>{i + 1}</td>
+                      <td>{x.product.product_name}</td>
+                      <td>{x.quantity}</td>
+                      <td>${x.list_price}</td>
+                      <td>${x.list_price * x.quantity}</td>
+                      <td><Button size="sm" onClick={() => newActions.requestBuyMore({
+                        product_id: x.product.product_id,
+                        order_id: orderDetail.order_id
+                      })}>Bye 1 More</Button></td>
+                      <td><Button size="sm" onClick={() => newActions.removeProductFromCart({
+                        product_id: x.product.product_id,
+                        order_id: orderDetail.order_id
+                      })}>Remove from cart</Button></td>
+                    </tr>))
+                  }
+                </tbody>
+              </Table>
+            </Col>
+          </Row>
 
+          <Row>
+            <Col>
+              <Button onClick={() => newActions.requestAddToCard({ prop1: 1 })}>
+                Sample Async - action: requestAddToCard
+              </Button>
+            </Col>
+            <Col xs={6}>2 of 3 (wider)</Col>
+            <Col>3 of 3</Col>
+          </Row>
+        </Container>
 
       </div>
     );

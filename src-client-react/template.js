@@ -5,6 +5,7 @@ export default function renderFullPage(html, finalState) {
     <html>
       <head>
         <title>Redux Universal Example</title>
+        <link rel='stylesheet' href='/assets/bootstrap.min.css'/>
         <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap" />
       </head>
       <body>
