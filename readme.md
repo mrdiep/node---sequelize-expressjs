@@ -1,69 +1,34 @@
-issues:
-https://github.com/flexxnn/sequelize-auto-migrations/issues/65
+# Skeleton: React Server Side + Node Server with Postgres/SqlServer
+## _This is the incopleted skeleton_
 
-pg_dump --dbname=postgresql://postgres:123@127.0.0.1:5432/BikeStoreDemo > D:\postgres-bike-demo.sql
+## Features BackEnd:
++ New ES style, using babel with latest preset
++ Node server using the sequelize ORM, support DB First and Model First with sample script for seed, migrate db, create model or update model from db
++ Styled OData (same as .net)
++ 3 linear tier layer: presentation, business model, data layer
++ Follow resful naming convention
++ Using common DB: https://www.sqlservertutorial.net/sql-server-sample-database
++ Swagger with auto-generator (almost same as .net)
++ Support multiple enviroment build (test.dev.prod)
++ The dyamic logger: can switch to many logger lib: current using Winston
++ Eslint + Eslint auto fix for styled *lazy* developer
++ Tech: expressjs, sequelize...
 
-step:
-1) run migrate:exec
-2) run seed:all
-3) run migration (if any)
-change config at ./database/config
+## Features ReactJs (server side rendering):
++ support router integrated with express-js server
++ support build output for both client + server.
++ LESS CODE FOR REDUX FLOW, developer dont need care about _CRAZY_ redux flow, I wrapped all in module, corrected sample is in orders module. (Copied styled in react typescript: actions + reducer in togethers)
++ Develope new features base on the module: included store, component, action inside each module
++ Tech: redux-thunk, bootstrap, immuablejs
++ babel build: can self customize, dont depend on react-scripts
+## Will complete in furture:
++ integrate auth
++ integrate web socket: for realtime
++ ....
 
-
-DB: https://www.sqlservertutorial.net/sql-server-sample-database/
-
-Lib:
-swagger: gen the api document
-eslint: check syntax
-sequelize-auto: generate the model from DB (DB First approach)
-winston: logger Lib
-pg: postgres client
-tedious: sql server client
-
-postman: test tool
-
-intergrated lib: eslint + fix
-
-sequelize:
-avoid: + select findAll then filter on server.
-
-import postman at test folder to test api
-
-react ssr: https://redux.js.org/recipes/server-rendering#redux-on-the-server
-https://reactrouter.com/web/guides/server-rendering
-
-
-thank for ES6.
-I copy style in the react typescript project that action / reducer is mostly same place.
-
-Dev: What the hell of middlware, what the hell of saga, thunk...
-developer just care about bussiness more than crazy think how redux flow work
-
-
-refer class: orders/actions/index to understand how wrap the the function
-
-import { createActionByName } from './index'
-
-import displayLoadingIndicator from './displayLoadingIndicator';
-
-export default class requestAddToCard extends BaseAction {
-  async runMiddleware(payload) {
-    console.log('pay me a coffee. hehe\r\npayload=', JSON.stringify(payload, null, 2))
-
-    this.pushAction(createActionByName(displayLoadingIndicator.name)({ show: true }));
-
-    const assumeApiResponseData = await new Promise((s, r) => {
-      setTimeout(() => {
-
-        this.pushAction(createActionByName(displayLoadingIndicator.name)({ show: false }));
-        s(1);
-      }, 3000);
-    });
-
-    return assumeApiResponseData;
-  }
-
-  update(currentState, payload) {
-    currentState.cartItemCounter = currentState.cartItemCounter + payload
-  }
-}
+## Wellknow issue:
+- still mixed between function and class.
+- the naming convention still mixed between snakeCase and cammelCase
+- the comment still with 'avoid this/that' still alot
+- find the fixed issue in branched name: completed issue
+- 
