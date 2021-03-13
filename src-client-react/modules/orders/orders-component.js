@@ -3,6 +3,9 @@ import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 
 import * as ActionCreators from './orders-action'
+
+import { createWrapActions } from './simpler'
+
 class ProductsComponent extends Component {
 
   componentDidMount() {
@@ -16,10 +19,11 @@ class ProductsComponent extends Component {
   }
 
   render() {
-    const { isFetching, orderDetail } = this.props
+    const { isFetching, orderDetail, newActions } = this.props
     return (
       <div>
 
+<button onClick={() => newActions.requestAddToCard({prop1: 1})}>SIMPLE DISPATC ACTION - ACTION_REDUCER BASED CLASS</button>
         <b>WANT BEAUTIY: ADD CSS AND STYLE LIBS</b>
         order_id: {orderDetail.order_id}
         <br/>
@@ -56,7 +60,8 @@ function mapStateToProps({ orders }) {
 function mapDispatchToProps(dispatch) {
   return {
     dispatch,
-    actions: bindActionCreators(ActionCreators, dispatch)
+    actions: bindActionCreators(ActionCreators, dispatch),
+    newActions: bindActionCreators(createWrapActions(), dispatch)
   }
 }
 export default connect(mapStateToProps, mapDispatchToProps)(ProductsComponent)
