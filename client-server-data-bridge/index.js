@@ -1,10 +1,16 @@
-//export const fetchProducts = async () => {return { products: { isFetched: false, products:[] } }}
 import models from '../src/database/models'
 
 import { getOrderById } from '../src/services/orderServices'
 import { initState as orderInitState } from '../src-client-react/modules/orders/orders-reducers'
-// do not use this way: import service as sample bellow
-export const fetchProducts = async () => {
+
+export const initOrders = async ({ order_id }) => {
+  const orderDetail = await getOrderById({ order_id })
+
+  return { orders: { ...orderInitState, orderDetail, isFetching: true} };
+}
+
+// do not use this way - import DB models. Correct sample is: import service as sample of Orders
+export const initProducts = async () => {
   const products = await models.products.findAll({
     limit: 10,
     include: [
@@ -28,8 +34,3 @@ export const fetchProducts = async () => {
   return { products: { isFetching: true, products } };
 }
 
-export const fetchOrderItemByOrderId = async ({ order_id }) => {
-  const orderDetail = await getOrderById({ order_id })
-
-  return { orders: { ...orderInitState, orderDetail, isFetching: true} };
-}

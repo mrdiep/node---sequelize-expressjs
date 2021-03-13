@@ -1,20 +1,29 @@
+import React from 'react'
+import { Route, Switch } from 'react-router-dom';
+
 import Products from './modules/products/products-component';
 import Orders from './modules/orders/components/orders-container';
 
-// if server side: use this to fetch data. should use webpack to switch the build condition
-import { fetchProducts, fetchOrderItemByOrderId } from '../client-server-data-bridge'
-
-const Routes = [
+export const Routes = [
   {
     path: '/products',
     component: Products,
-    loadData: (options) => fetchProducts(options)
+    loadDataFnName: 'initProducts'
   },
   {
     path: '/orders/:order_id',
     component: Orders,
-    loadData: (options) => fetchOrderItemByOrderId(options)
+    loadDataFnName: 'initOrders'
   }
 ];
 
-export default Routes;
+export const renderRouter = () => (
+  <div>
+    Hello, this is the demo, this is the master layout:: top menu will display here
+    <br/>
+  <Switch>
+    {Routes.map((x, index) => <Route key={index} path={x.path} component={x.component} />)}
+  </Switch>
+  </div>
+  )
+

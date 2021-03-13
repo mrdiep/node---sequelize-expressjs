@@ -28,7 +28,7 @@ class ProductsComponent extends Component {
     return (
       <>
         {isFetching && totalProducts === 0 && <h2>Loading...</h2>}
-        {!isFetching && totalProducts === 0 && <h2>Empty.</h2>}
+        {!isFetching && totalProducts === 0 && <h2>Empty.sss</h2>}
         {products.map(x => (ProductItem(x, actions)))}
       </>
     );

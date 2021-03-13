@@ -1,3 +1,5 @@
+import * as BaseWrappedFn from '../../../redux/base-wrapped'
+
 import requestAddToCard from './requestAddToCard'
 import displayLoadingIndicator from './displayLoadingIndicator'
 import removeProductFromCart from './removeProductFromCart'
@@ -16,38 +18,6 @@ const actionClasses = {
   updateValue: new updateValue()
 }
 
-export function reducer(state, { type, payload }, immuableState) {
-  const classType = type.substring(prefix.length);
-
-  const actionObject = actionClasses[classType];
-
-  console.log(JSON.stringify(payload));
-  if (actionObject == null) return;
-
-  actionObject.update(state, payload, immuableState);
-}
-
-export function createActionByName(name) {
-  return (payload) => {
-    return dispatch => {
-      const instance = actionClasses[name];
-      instance.pushAction = dispatch;
-      if (!instance.runMiddleware) {
-        dispatch({ type: `${prefix}${name}`, payload });
-      }
-      else {
-        instance.runMiddleware(payload).then(x => {
-          dispatch({ type: `${prefix}${name}`, payload: x });
-        })
-      }
-    }
-  }
-}
-
-export function createWrapActions() {
-  const classes = Object.keys(actionClasses);
-  return classes.reduce((preValue, currentValue) => {
-    preValue[currentValue] = createActionByName(currentValue)
-    return preValue;
-  }, {});
-}
+export const reducer = (state, action, immuableState) => BaseWrappedFn.reducer(actionClasses, prefix, state, action, immuableState);
+export const createActionByName = (name) => BaseWrappedFn.createActionByName(actionClasses, prefix, name);
+export const createWrapActions = () => BaseWrappedFn.createWrapActions(actionClasses, prefix);

@@ -73,6 +73,7 @@
     "mini-css-extract-plugin": "^0.4.3",
     "node-sass": "^4.9.3",
     "nodemon": "^1.19.1",
+    "redux-devtools-extension": "^2.13.9",
     "sequelize-auto": "^0.8.0",
     "sequelize-auto-migrations": "git+https://github.com/flexxnn/sequelize-auto-migrations.git",
     "styles-loader": "^3.0.0",

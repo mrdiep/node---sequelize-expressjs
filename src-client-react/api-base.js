@@ -1,4 +1,5 @@
 import axios from "axios";
+
 import { API_URL } from './configuration';
 
 export const fetch = ({ url, params, authToken }) => {

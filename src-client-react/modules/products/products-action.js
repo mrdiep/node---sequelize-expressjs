@@ -27,10 +27,7 @@ export function deleteProduct(productId) {
       })
     }, 3000);
   }
-
-
 }
-
 
 //second way
 export function fetchProducts() {

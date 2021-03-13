@@ -88,7 +88,7 @@ class ProductsComponent extends Component {
                       <td><Button size="sm" onClick={() => newActions.requestBuyMore({
                         product_id: x.product.product_id,
                         order_id: orderDetail.order_id
-                      })}>Bye 1 More</Button></td>
+                      })}>Add +1</Button></td>
                       <td><Button size="sm" onClick={() => newActions.removeProductFromCart({
                         product_id: x.product.product_id,
                         order_id: orderDetail.order_id
@@ -111,7 +111,7 @@ class ProductsComponent extends Component {
           <Row>
             <Col sm={12}>
               <Button onClick={() => newActions.requestAddToCard({ prop1: 1 })}>
-                Sample Async - action: requestAddToCard
+                Sample Async - debug in action: requestAddToCard
               </Button>
             </Col>
           </Row>

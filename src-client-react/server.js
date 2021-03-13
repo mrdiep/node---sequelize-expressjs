@@ -1,14 +1,13 @@
 import React from 'react'
 import { renderToString } from 'react-dom/server'
 import { Provider } from 'react-redux'
-import configureStore from './redux/configureStore'
-import App from './components/app'
 import { StaticRouter, matchPath  } from 'react-router-dom';
-import Routes from './routers';
+
+import configureStore from './redux/configureStore'
+import { Routes, renderRouter} from './routers';
+import * as loadServerSideData from '../client-server-data-bridge'
 
 export default async (req) => {
-  // Configure the store with the initial state provided
-  //const initialState = { isFetching: false, products: [] } //depend on req
   console.log(req.url);
 
   const matches = Routes
@@ -23,14 +22,14 @@ export default async (req) => {
 
   console.log(currentRoute.matchValue)
 
-  const initialState  = await currentRoute.route.loadData(currentRoute.matchValue.params);
+  const initialState  = await loadServerSideData[currentRoute.route.loadDataFnName](currentRoute.matchValue.params);
 
   const store = configureStore(initialState)
   // render the App store static markup ins content variable
   let content = renderToString(
     <Provider store={store} >
       <StaticRouter location={req.url}>
-        <App/>
+         {renderRouter()}
       </StaticRouter>
     </Provider>
   );
