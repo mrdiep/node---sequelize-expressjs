@@ -22,8 +22,13 @@ export default async (req) => {
 
   console.log(currentRoute.matchValue)
 
-  const initialState  = await loadServerSideData[currentRoute.route.loadDataFnName](currentRoute.matchValue.params);
+  const loadInitData = loadServerSideData[currentRoute.route.loadDataFnName];
 
+  let initialState  = {}
+  if (loadInitData) {
+    initialState  = await loadInitData(currentRoute.matchValue.params);
+  }
+  
   const store = configureStore(initialState)
   // render the App store static markup ins content variable
   let content = renderToString(

@@ -1,15 +1,28 @@
-export const authenticate = (req, res, next) => {
+import Cookies from 'universal-cookie';
+
+import { verify } from '../services/loginServices'
+const ignoreRoute = ['/login', '/api/login', '/assets', '/doc', '/favicon.ico']
+
+export const authenticate = async (req, res, next) => {
   // if using 3rd auth (passport.js/cookiejs), <= put it here
   // base on technical document. handle different method, can jwt via header/params, or cookies
-  const auth = true;
-  if (!auth) {
-    res.status(401);
+
+  if (ignoreRoute.filter(x => req.url.startsWith(x)).length > 0) {
+    next();
     return;
   }
 
-  // check user access: such as be locked, be expirered......
+  const cookies = new Cookies(req.headers.cookie)
+  const token = cookies.get('auth') || req.headers.authorization
+  const {success, decoded} = await verify(token);
 
-  req.authenticatedUser = {username: 'An', userId: 1};
-  req.isAuthenticated = auth;
+  if (!success) {
+    res.status(401);
+    res.json({error: 'not auth'})
+    return;
+  }
+
+  req.authenticatedUser = decoded;
+  req.isAuthenticated = success;
   next();
 };

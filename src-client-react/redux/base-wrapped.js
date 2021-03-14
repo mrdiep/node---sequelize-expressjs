@@ -1,5 +1,7 @@
 
 export function reducer(actionClasses, prefix, state, { type, payload }, immuableState) {
+  if (!type.startsWith(prefix)) return;
+  
   const classType = type.substring(prefix.length);
 
   const actionObject = actionClasses[classType];
