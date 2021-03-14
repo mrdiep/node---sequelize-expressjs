@@ -26,7 +26,7 @@ export default async (req) => {
 
   let initialState  = {}
   if (loadInitData) {
-    initialState  = await loadInitData(currentRoute.matchValue.params);
+    initialState  = await loadInitData(currentRoute.matchValue.params, req.authenticatedUser);
   }
   
   const store = configureStore(initialState)

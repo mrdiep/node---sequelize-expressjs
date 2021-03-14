@@ -153,3 +153,25 @@ export const getOrderById = async ({order_id}) => {
   return order;
 };
 
+
+export const getOrderByCustomerId = async ({customer_id}) => {
+  const orders = await models.orders.findAll({
+    where: {customer_id},
+    raw: true,
+    nest: true,
+    include: [
+      {
+        model: models.stores,
+        as: 'store',
+      },
+      {
+        model: models.staffs,
+        as: 'staff',
+      },
+    ],
+  });
+
+  return orders;
+};
+
+

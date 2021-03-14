@@ -23,6 +23,11 @@ class LoginComponent extends Component {
           Now, you able to use the web resource with your identity
       </Col>
       </Row>
+      <Row>
+        <Col sm={12}>
+          <Button onClick={() => actions.doLogout()}>Logout</Button>
+      </Col>
+      </Row>
     </div>
 
     const renderLoginForm = () => <Row>

@@ -2,7 +2,9 @@ import React from 'react'
 import { Route, Switch, matchPath } from 'react-router-dom';
 
 import ProductsContainer from './modules/products/products-component';
-import OrdersContainer from './modules/orders/components/orders-container';
+import OrderDetailContainer from './modules/orders/components/order-detail-container';
+import OrderListContainer from './modules/orders/components/order-list-container';
+
 import LoginContainer from './modules/login/components/login-container';
 
 import CustomerViewMasterLayout from './components/master-layout/customer-view-master-layout'
@@ -16,8 +18,13 @@ export const Routes = [
   },
   {
     path: '/orders/:order_id',
-    component: OrdersContainer,
-    loadDataFnName: 'initOrders'
+    component: OrderDetailContainer,
+    loadDataFnName: 'initOrderDetail'
+  },
+  {
+    path: '/orders',
+    component: OrderListContainer,
+    loadDataFnName: 'initOrderList'
   },
   {
     path: '/login',

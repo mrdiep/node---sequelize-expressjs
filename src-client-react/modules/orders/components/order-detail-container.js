@@ -6,7 +6,7 @@ import { Button, Container, Row, Col, Table } from 'react-bootstrap';
 import SearchAndOrderMoreProduct from './search-and-order-component'
 import { createWrapActions } from '../actions'
 
-class ProductsComponent extends Component {
+class OrderDetailComponent extends Component {
 
   componentDidMount() {
     console.log('componentDidMount')
@@ -132,4 +132,4 @@ function mapDispatchToProps(dispatch) {
     newActions: bindActionCreators(createWrapActions(), dispatch)
   }
 }
-export default connect(mapStateToProps, mapDispatchToProps)(ProductsComponent)
+export default connect(mapStateToProps, mapDispatchToProps)(OrderDetailComponent)
