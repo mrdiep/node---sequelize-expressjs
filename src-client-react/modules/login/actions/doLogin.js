@@ -1,5 +1,5 @@
 import Cookies from 'universal-cookie';
-
+import { replace } from 'connected-react-router'
 import BaseAction from '../../../redux/base-action'
 import * as BaseApi from '../../../api-base';
 
@@ -25,7 +25,7 @@ export default class doLogin extends BaseAction {
 
       localStorage.removeItem('customerInfo');
       localStorage.removeItem('staffInfo');
-      
+
       if (!!loginResponse.data.customerInfo) {
         localStorage.setItem('customerInfo', JSON.stringify(loginResponse.data.customerInfo))
       }
@@ -34,7 +34,12 @@ export default class doLogin extends BaseAction {
         localStorage.setItem('staffInfo', JSON.stringify(loginResponse.data.staffInfo))
       }
 
+      // sample push something after 3 second
+      setTimeout(() => {
+        this.pushAction(replace('/orders'));
+      }, 3000);
     }
+
     return loginResponse.data;
   }
 

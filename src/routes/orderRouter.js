@@ -9,6 +9,7 @@ const orderController = orders;
 const router = Router();
 
 //
+router.get('/', orderController.getOrderByCustomerIdHandler);
 router.post('/', orderController.orderValidator, orderController.createOrderHandler);
 router.get('/:order_id', orderController.getOrderByIdHandler);
 router.post('/:order_id/products', orderController.addProductToOrderHandler);

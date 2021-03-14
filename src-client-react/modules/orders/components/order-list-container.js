@@ -1,11 +1,25 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
+import {
+  Link
+} from "react-router-dom";
 import { Button, Container, Row, Col, Table } from 'react-bootstrap';
 
 import { createWrapActions } from '../actions'
 
 class OrderListComponent extends Component {
+
+  componentDidMount() {
+    console.log('componentDidMount')
+    const { isFetching, actions } = this.props
+    //will use: bind action to props
+    console.log(isFetching)
+    if (!isFetching) {
+      // use client param here to load
+      actions.fetchMyOrderList();
+    }
+  }
 
   render() {
     const { orderDetail, showLoadingIndicator, userOrders, searchMoreProductViewModel } = this.props
@@ -16,7 +30,17 @@ class OrderListComponent extends Component {
 
       <Row><Col sm={12}>You have {userOrders.length} order(s)</Col></Row>
 
-      {userOrders.map((x, index) => (<Row key={index}><Col>OrderId: {x.order_id}</Col></Row>))}
+      {userOrders.map((x, index) => (<Row key={index}><Col>
+
+        <Link
+          to={{
+            pathname: "/orders/" + x.order_id,
+            search: "?sort=name",
+            hash: "#the-hash"
+          }}>
+          OrderId: {x.order_id}
+        </Link>
+      </Col></Row>))}
     </Container>
   }
 }
@@ -28,7 +52,7 @@ function mapStateToProps({ orders }) {
 function mapDispatchToProps(dispatch) {
   return {
     dispatch,
-    newActions: bindActionCreators(createWrapActions(), dispatch)
+    actions: bindActionCreators(createWrapActions(), dispatch)
   }
 }
 export default connect(mapStateToProps, mapDispatchToProps)(OrderListComponent)

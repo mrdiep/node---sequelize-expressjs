@@ -4,10 +4,10 @@ import { reducer } from './actions'
 
 export const initState = {
   isFetching: false,
+  userOrders: [],
   orderDetail: null,
   cartItemCounter: 0,
   showLoadingIndicator: false, 
-
   //should declare by models bussiness
   searchMoreProductViewModel: {
     searchText: '',

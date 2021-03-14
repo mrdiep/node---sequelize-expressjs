@@ -1,12 +1,13 @@
 import React from 'react'
 import { render } from 'react-dom'
 import { Provider } from 'react-redux'
-import { BrowserRouter } from 'react-router-dom';
+import { ConnectedRouter } from 'connected-react-router'
+
 import Cookies from 'universal-cookie';
 import jwt from 'jsonwebtoken'
 
 const cookies = new Cookies();
-import configureStore from './redux/configureStore'
+import configureStore, {history} from './redux/configureStoreClient'
 import { renderRouter } from './routers';
 import { initState as loginInitState } from './modules/login/login-reducers'
 // import 'bootstrap/dist/css/bootstrap.css';
@@ -39,9 +40,9 @@ if (!!decodeToken && new Date(decodeToken.exp * 1000) > new Date()) {
 const store = configureStore(state)
 render(
   <Provider store={store} >
-    <BrowserRouter>
+    <ConnectedRouter history={history}>
       {renderRouter()}
-    </BrowserRouter>,
+    </ConnectedRouter>
   </Provider>,
   document.querySelector('#root')
 )

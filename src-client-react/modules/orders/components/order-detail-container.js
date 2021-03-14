@@ -10,16 +10,24 @@ class OrderDetailComponent extends Component {
 
   componentDidMount() {
     console.log('componentDidMount')
-    const { isFetching } = this.props
+    const { isFetching, router } = this.props
     //will use: bind action to props
     console.log(isFetching)
     if (!isFetching) {
-      this.props.actions.fetchOrderItems(productId);
+      console.log(router)
+      console.log(order_id)
+      // use client param here to load
+      // this.props.actions.fetchOrderItem(order_id);
     }
   }
 
   render() {
-    const { orderDetail, showLoadingIndicator, newActions, searchMoreProductViewModel } = this.props
+
+    if (!this.props.isFetching) {
+      return <div>Data not fetching.</div>
+    }
+
+    const { orders: { orderDetail, showLoadingIndicator, searchMoreProductViewModel }, newActions } = this.props
     if (showLoadingIndicator) {
       return (
         <Container>
@@ -122,8 +130,8 @@ class OrderDetailComponent extends Component {
   }
 }
 
-function mapStateToProps({ orders }) {
-  return orders
+function mapStateToProps({ orders, router }) {
+  return { orders, router }
 }
 
 function mapDispatchToProps(dispatch) {
