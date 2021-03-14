@@ -50,6 +50,7 @@
     "react-router-dom": "^5.2.0",
     "redux": "^4.0.5",
     "redux-thunk": "^2.3.0",
+    "route-parser": "0.0.5",
     "sequelize": "^6.5.0",
     "swagger-autogen": "^2.7.1",
     "swagger-ui-express": "^4.1.6",

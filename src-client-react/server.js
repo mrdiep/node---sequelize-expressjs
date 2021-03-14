@@ -2,6 +2,7 @@ import React from 'react'
 import { renderToString } from 'react-dom/server'
 import { Provider } from 'react-redux'
 import { StaticRouter, matchPath  } from 'react-router-dom';
+import RouteParser from 'route-parser';
 
 import configureStore from './redux/configureStore'
 import { Routes, renderRouter} from './routers';
@@ -11,7 +12,7 @@ export default async (req) => {
   console.log(req.url);
 
   const matches = Routes
-  .map(route => ({matchValue: matchPath(req.url, route), route}))
+  .map(route => ({matchValue: matchPath(req.path, route), route}))
   .filter(x => x.matchValue)
 
   if (matches.length == 0) {
@@ -22,11 +23,18 @@ export default async (req) => {
 
   console.log(currentRoute.matchValue)
 
-  const loadInitData = loadServerSideData[currentRoute.route.loadDataFnName];
+  const loadInitData = loadServerSideData[currentRoute.route.loadDataFn?.fnName];
 
   let initialState  = {}
   if (loadInitData) {
-    initialState  = await loadInitData(currentRoute.matchValue.params, req.authenticatedUser);
+    var routeParse = new RouteParser(currentRoute.route.path);
+
+    console.log(req.query)
+    const serverData  = await loadInitData({...routeParse.match(req.url), ...req.query}, req.authenticatedUser);
+  
+    initialState = {[currentRoute.route.loadDataFn.storeName]: serverData, loginInfo: {
+      userIdentity: req.userIdentity || { authenticated: false }
+    }}
   }
   
   const store = configureStore(initialState)

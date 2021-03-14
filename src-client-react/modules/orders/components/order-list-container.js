@@ -12,10 +12,10 @@ class OrderListComponent extends Component {
 
   componentDidMount() {
     console.log('componentDidMount')
-    const { isFetching, actions } = this.props
+    const { isUserOrderListFetched, actions } = this.props
     //will use: bind action to props
-    console.log(isFetching)
-    if (!isFetching) {
+    console.log(isUserOrderListFetched)
+    if (!isUserOrderListFetched) {
       // use client param here to load
       actions.fetchMyOrderList();
     }

@@ -13,24 +13,35 @@ export const Routes = [
   {
     path: '/products',
     component: ProductsContainer,
-    loadDataFnName: 'initProducts',
+    loadDataFn: { fnName: 'initProducts', storeName: 'products' },
     masterLayout: CustomerViewMasterLayout
   },
   {
     path: '/orders/:order_id',
     component: OrderDetailContainer,
-    loadDataFnName: 'initOrderDetail'
+    loadDataFn: { fnName: 'initOrderDetail', storeName: 'orders' },
   },
   {
     path: '/orders',
     component: OrderListContainer,
-    loadDataFnName: 'initOrderList'
+    loadDataFn: { fnName: 'initOrderList', storeName: 'orders' },
   },
   {
     path: '/login',
     component: LoginContainer
   }
 ];
+
+export const getParams = (location) => {
+  const matches = Routes
+  .map(route => matchPath(location.pathname, route))
+  .filter(x => x)
+
+
+  if (matches.length > 0) return { params: matches[0].params, query: location.query};
+
+  return {};
+}
 
 export const renderRouter = () => (
   <div>

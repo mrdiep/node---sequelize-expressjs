@@ -3,9 +3,10 @@ import { fromJS } from "immutable";
 import { reducer } from './actions'
 
 export const initState = {
-  isFetching: false,
-  userOrders: [],
+  isOrderDetailFetched: false,
   orderDetail: null,
+  isUserOrderListFetched: false,
+  userOrders: [],
   cartItemCounter: 0,
   showLoadingIndicator: false, 
   //should declare by models bussiness

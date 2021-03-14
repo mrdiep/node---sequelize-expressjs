@@ -19,9 +19,9 @@ export const verify = async (token) => {
     jwt.verify(token, "TOKEN_SECRET", (err, decoded) => s({ success: !err, message: 'verify fail', decoded }))
   )
 }
-const genAuthToken = ({ id, email, first_name, last_name }) => {
+const genAuthToken = ({ id, email, first_name, last_name, userType }) => {
   // using jwt token here
-  return jwt.sign({ id, email, first_name, last_name }, "TOKEN_SECRET", { expiresIn: '1800s' });
+  return jwt.sign({ id, email, first_name, last_name, userType }, "TOKEN_SECRET", { expiresIn: '1800s' });
 }
 
 const staffLogin = async ({ email }) => {
@@ -32,7 +32,7 @@ const staffLogin = async ({ email }) => {
   }
 
   return {
-    token: genAuthToken({ id: model.dataValues.staff_id, ...model.dataValues }),
+    token: genAuthToken({ id: model.dataValues.staff_id, ...model.dataValues, userType: 'staff' }),
     staffInfo: model,
     success: true
   }
@@ -46,7 +46,7 @@ const customerLogin = async ({ email }) => {
   }
   
   return {
-    token: genAuthToken({ id: model.dataValues.customer_id, ...model.dataValues }),
+    token: genAuthToken({ id: model.dataValues.customer_id, ...model.dataValues, userType: 'customer' }),
     customerInfo: model,
     success: true
   }

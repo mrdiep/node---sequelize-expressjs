@@ -5,29 +5,30 @@ import { Button, Container, Row, Col, Table } from 'react-bootstrap';
 
 import SearchAndOrderMoreProduct from './search-and-order-component'
 import { createWrapActions } from '../actions'
+import { getParams } from '.././../../routers'
 
 class OrderDetailComponent extends Component {
 
   componentDidMount() {
     console.log('componentDidMount')
-    const { isFetching, router } = this.props
-    //will use: bind action to props
-    console.log(isFetching)
-    if (!isFetching) {
-      console.log(router)
+    const { newActions, router } = this.props
+    if (!this.props.orders.isOrderDetailFetched) {
+
+      const { params: { order_id } } = getParams(router.location);
+
       console.log(order_id)
       // use client param here to load
-      // this.props.actions.fetchOrderItem(order_id);
+      newActions.fetchOrderItem({ order_id });
     }
   }
 
   render() {
 
-    if (!this.props.isFetching) {
-      return <div>Data not fetching.</div>
+    if (!this.props.orders.isOrderDetailFetched) {
+      return <div>Data is not fetched.</div>
     }
 
-    const { orders: { orderDetail, showLoadingIndicator, searchMoreProductViewModel }, newActions } = this.props
+    const { orders: { orderDetail, showLoadingIndicator, searchMoreProductViewModel }, loginInfo, newActions } = this.props
     if (showLoadingIndicator) {
       return (
         <Container>
@@ -41,16 +42,19 @@ class OrderDetailComponent extends Component {
     }
 
     const renderRow = (key, value) => (<Row>
-      <Col sm={4}><b>{key}</b></Col>
-      <Col sm={8}>{value}</Col>
+      <Col sm={3}>{key}</Col>
+      <Col sm={9}><i>{value}</i></Col>
     </Row>);
+
+    console.log(loginInfo.userIdentity)
 
     return (
       <div>
         <Container>
           <Row>
             <Col sm={12}>
-              <h4>ORDER DETAIL</h4>
+              <h4>Hello {loginInfo.userIdentity.customerInfo.first_name || loginInfo.userIdentity.staffInfo.first_name}, </h4>
+              <h5>Order detail:</h5>
             </Col>
           </Row>
 
@@ -130,8 +134,8 @@ class OrderDetailComponent extends Component {
   }
 }
 
-function mapStateToProps({ orders, router }) {
-  return { orders, router }
+function mapStateToProps({ orders, router, loginInfo }) {
+  return { orders, router, loginInfo }
 }
 
 function mapDispatchToProps(dispatch) {
