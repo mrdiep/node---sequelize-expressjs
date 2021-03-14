@@ -21,7 +21,7 @@ export default class doLogin extends BaseAction {
     this.showIndicator(false);
     if (loginResponse.data.success) {
       const cookies = new Cookies();
-      cookies.set('auth', `Bearer ${loginResponse.data.token}`, { path: '/' });
+      cookies.set('auth', `${loginResponse.data.token}`, { path: '/' });
 
       localStorage.removeItem('customerInfo');
       localStorage.removeItem('staffInfo');

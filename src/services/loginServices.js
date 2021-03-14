@@ -15,11 +15,8 @@ export const login = (loginRequest) => {
 export const verify = async (token) => {
   if (!token) return { success: false, message: 'no token provided' }
 
-  if (!token.startsWith('Bearer')) return { success: false, message: 'only support Bearer now' }
-  const bearerToken = token.substring('Bearer '.length);
-
   return new Promise((s, r) =>
-    jwt.verify(bearerToken, "TOKEN_SECRET", (err, decoded) => s({ success: !err, message: 'verify bearer fail', decoded }))
+    jwt.verify(token, "TOKEN_SECRET", (err, decoded) => s({ success: !err, message: 'verify fail', decoded }))
   )
 }
 const genAuthToken = ({ id, email, first_name, last_name }) => {
