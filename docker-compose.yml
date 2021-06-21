@@ -1,0 +1,16 @@
+version: "3"
+services:
+  postgres_service:
+    container_name: postgres_service
+    build:
+      context: .
+      dockerfile: postgres_bike_db.Dockerfile
+    image: postgres_bike_db_image
+    volumes:
+      - ./postgres_db:/var/lib/postgresql
+    ports:
+      - "5432:5432"
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=123
+

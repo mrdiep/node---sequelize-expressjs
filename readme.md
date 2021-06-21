@@ -48,3 +48,9 @@
 - Client still can use the middleware actions as normal react-redux code.
 - Dont call API to get the initial state data in server side: use service. 
 
+## Install Posgress via Docker
+
+```docker run --name postgres-docker -e POSTGRES_PASSWORD=123 -p 5432:5432 -d postgres```
+
+Recommend use https://dbeaver.io/ for DB tool
+

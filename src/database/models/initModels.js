@@ -46,6 +46,7 @@ function initModels(sequelize) {
   stores.hasMany(staffs, {as: 'staffs', foreignKey: 'store_id'});
 
   return {
+    sequelize,
     brands,
     categories,
     customers,
