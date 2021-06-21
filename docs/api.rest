@@ -1,0 +1,50 @@
+### Login customer
+# @name login
+post http://localhost:3300/api/login
+content-type: application/json
+
+{
+  "loginType": "customer",
+  "email": "debra.burks@yahoo.com"
+}
+
+### Login staff
+post http://localhost:3300/api/login
+content-type: application/json
+
+{
+  "loginType": "staff",
+  "email": "fabiola.jackson@bikes.shop"
+}
+
+###
+@authToken = {{login.response.body.token}}
+
+
+### Call with raw
+post http://localhost:3300/api/mock_project/phuc_hai_bang
+content-type: application/json
+Authorization: {{authToken}}
+
+{
+    "sql": "UPDATE brands set brand_name='WHAT' where brand_id=1"
+}
+
+### Call with raw
+post http://localhost:3300/api/mock_project/phuc_hai_bang
+content-type: application/json
+Authorization: {{authToken}}
+
+{
+    "sql": "select * from brands"
+}
+
+
+### CODE ANY
+post http://localhost:3300/api/mock_project/any_url
+content-type: application/json
+Authorization: {{authToken}}
+
+{
+    "post_body": {"any": 1}
+}

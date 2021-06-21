@@ -1,11 +1,11 @@
 require('dotenv').config();
 
 module.exports = {
-  development2: {
+  development: {
     url: 'postgres://postgres:123@127.0.0.1:5432/BikeStoreDemo',
     dialect: 'postgres',
   },
-  development: {
+  development2: {
     username: 'sa',
     password: '123',
     database: 'BikeStoreDemo',

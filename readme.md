@@ -54,3 +54,10 @@
 
 Recommend use https://dbeaver.io/ for DB tool
 
+Open DB tool Create new database name ```BikeStoreDemo```
+
+Run ```npm run migrate:exec```
+Next Run ```npm run seed:all```
+Next Run ```npm run start-dev```
+
+Edit code in 
